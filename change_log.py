@@ -17,8 +17,8 @@ class ChangeLogCreation():
     def CheckOut(self, org_name):
         if not os.path.exists(org_name):
             os.makedirs(org_name)
-        self.login = "oecyc"
-        self.password = "eth123456"
+        self.login = ""
+        self.password = ""
         self.g = Github(self.login, self.password)
         self.org = self.g.get_user("openstack")
         for repos in self.org.get_repos():
