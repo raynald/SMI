@@ -8,10 +8,17 @@ repo = 'mantle'
 issue_number = '201'
 
 class iIssue():
+    def removeQuoteAndLink(self, s):
+        link_pattern_str = ur'''(!?)\[([^\]]*)\]\(([^)]+)\)'''
+        quote_pattern_str = ur'''(>)([^\n$]+)(\n|$)'''
+        rep_str = ur''''''
+        result = re.sub(link_pattern_str, rep_str, s)
+        return re.sub(quote_pattern_str, rep_str, result)
     def removeNonAscii(self, s): return "".join(i for i in s if ord(i)<128)
 
     def printOut(self, name, date, body):
-        newStr = self.removeNonAscii(body).replace('\r\n',' ').replace(",","~")
+        newStr = self.removeQuoteAndLink(body)
+        newStr = self.removeNonAscii(newStr).replace('\r\n',' ').replace(",","~")
         #save file here
         if name in self.user_poll:
             self.user_poll[name] += newStr
