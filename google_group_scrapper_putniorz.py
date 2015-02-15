@@ -1,7 +1,8 @@
 import time
-import xml.etree.ElementTree
+from BeautifulSoup import BeautifulSoup
 from selenium import webdriver
 
+#GOOGLE_GROUP_BASE = 'https://groups.google.com/forum/'
 group_url = 'https://groups.google.com/forum/#!topic/light-table-discussion/5YscXFxTLRE'
 
 def thread_to_dict(thread):
@@ -20,8 +21,11 @@ if __name__ == '__main__':
     browser.set_window_size(1024, 768)
     browser.get(group_url)
     time.sleep(5)
-    frontpage = fromstring(browser.page_source)
+    source = browser.page_source
+    source = source.encode('utf-8')
+    frontpage = BeautifulSoup(source)
+    print frontpage.prettify()
     browser.quit()
-    frontpage.make_links_absolute(GOOGLE_GROUP_BASE)
-    html_threads = frontpage.xpath('//div[@role="listitem"]')
-    threads = (thread_to_dict(thread) for thread in html_threads)
+    #frontpage.make_links_absolute(GOOGLE_GROUP_BASE)
+    #html_threads = frontpage.xpath('//div[@role="listitem"]')
+    #threads = (thread_to_dict(thread) for thread in html_threads)
