@@ -33,9 +33,16 @@ if __name__ == '__main__':
         user_poll[index]['name'] = span.text.encode('utf-8')
         index += 1
     index = 0
+    for span in frontpage.findAll("div", "HPFAGND-wb-P"):
+        content = span.text.encode('utf-8')
+        if len(content)>0:
+            user_poll[index]['comment'] = content.replace(",","~").replace("\n","")
+            index += 1
+    """
     for span in frontpage.findAll("span", "HPFAGND-wb-fb"):
         user_poll[index]['comment'] = span.text.encode('utf-8').replace(",","~")
         index += 1
+    """
     browser.quit()
     for x in user_poll:
         if x['name'] in combiner:
