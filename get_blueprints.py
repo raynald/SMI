@@ -5,7 +5,7 @@ pro_name = 'neutron'
 my_project = launchpad.projects(pro_name)
 specifications = my_project.all_specifications
 with open('yash/' + pro_name + '.csv', 'a') as f:
-    f.write('Priority,Blueprint,Design,Delivery,Assignee,Series\n')
+    f.write('Priority,Blueprint,Design,Delivery,Assignee,Email,Series\n')
     for blueprints in specifications:
         priority = blueprints.priority
         blueprint = blueprints.name
